@@ -1,7 +1,7 @@
 package fr.uml.conc;
 
 /**
- * Exercice 1
+ * Exercice 1 - Publication safe
  * 
  * @author mdacos05
  *

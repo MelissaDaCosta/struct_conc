@@ -11,6 +11,11 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Exercice 2 - Liste chainée avec ajout en fin
+ * @author melissa
+ *
+ */
 public class LockFreeStringList {
 	// LockFreeStringList peut voir Entry
 	static final class Entry {
@@ -32,6 +37,7 @@ public class LockFreeStringList {
 	static {
 		var lookup = MethodHandles.lookup();
 		try {
+		    // findVarHandle​(Class<?> recv,String name, Class<?> type)
 			NEXT_HANDLE = lookup.findVarHandle(Entry.class, "next", Entry.class);
 		} catch (NoSuchFieldException | IllegalAccessException e) {	// 2 cas qui ne devrait pas se produire
 			throw new AssertionError(e);	// pas censé être là
@@ -53,7 +59,7 @@ public class LockFreeStringList {
 					return ;
 				}
 				
-				next = currentLast.next; 	//si ca ne fonctionne pas, last.next n'est plus null : onn passe au suivant
+				next = currentLast.next; 	//si ca ne fonctionne pas, last.next n'est plus null : on passe au suivant
 			}
 			currentLast = next;	// déplace le dernier maillon
 		}
@@ -92,7 +98,8 @@ public class LockFreeStringList {
 }
 
 /**
- * VarHandle permet de récupérer par référence (& en C) Changer les valeurs
- * d'une case mémoire dans la RAM Besoin d'un seul VarHandle pour changer
+ * VarHandle permet de récupérer par référence (& en C). 
+ * Changer les valeurs d'une case mémoire dans la RAM.
+ * Besoin d'un seul VarHandle pour changer
  * plusieurs case si elles sont du même type.
  **/

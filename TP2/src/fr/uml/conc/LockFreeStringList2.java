@@ -11,6 +11,11 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Exercice 2 - Liste chainée avec ajout en fin
+ * @author melissa
+ *
+ */
 public class LockFreeStringList2 {
 	// LockFreeStringList peut voir Entry
 	static final class Entry {
