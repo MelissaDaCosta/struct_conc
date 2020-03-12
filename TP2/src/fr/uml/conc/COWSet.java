@@ -17,8 +17,11 @@ public class COWSet<E> {
 
   static {
     var lookup = MethodHandles.lookup();
-    // HASH_ARRAY_HANDLE = lookup.findVarHandle(COWSet.class, "hashArray", E[][].class);
-    HASH_ARRAY_HANDLE = MethodHandles.arrayElementVarHandle(Object[][].class);
+    try {
+      HASH_ARRAY_HANDLE = lookup.findVarHandle(COWSet.class, "hashArray", Object[][].class);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new AssertionError(e);  // pas censé être là
+    }
   }
 
   @SuppressWarnings("unchecked")
@@ -33,16 +36,18 @@ public class COWSet<E> {
     Objects.requireNonNull(element);
     var index = element.hashCode() % hashArray.length;
     // 1 lecture volatile
-    var EoldArray = HASH_ARRAY_HANDLE.getVolatile(hashArray[index]);
-    for (var e : oldArray) {
-      if (element.equals(e)) { // si l'élément est déjà présent
+    var oldArray = (E) HASH_ARRAY_HANDLE.getVolatile(hashArray[index]);
+    //oldArray = oldArray[index];
+    for (var i=0; i<((String) oldArray).length(); i++) {
+      if (element.equals(oldArray[i])) { // si l'élément est déjà présent
         return false;
       }
     }
     // agrandit de 1
     var newArray = Arrays.copyOf(oldArray, oldArray.length + 1);
     // CAS
-    newArray[oldArray.length] = element; // insère l'élément
+    HASH_ARRAY_HANDLE.compareAndSet(oldArray[index], newArray, newArray);
+    //newArray[oldArray.length] = element; // insère l'élément
     hashArray[index] = newArray; // assigne le tableau
     return true;
   }
