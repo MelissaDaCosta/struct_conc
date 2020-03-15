@@ -16,7 +16,7 @@ garantie que le champ sera bien initialié avant la sortie du constructeur
 
 4.
 Pas de problème de publication car une écritures volatile garantit que toutes
-les critures avant ont été faites.
+les écritures avant ont été faites.
 Donc toutes les écritures faites avant la sortie du constructeur.
 Un champ volatile coute plus cher qu'un champ final
 
@@ -30,4 +30,5 @@ On met le thread dans une autre méthode et ne pas l'appeler dans le constructeu
 
 6.
 Ne pas démarrer un thread dans un constructeur.
-Sinon pas de problème de publication car les variables affichées sont données en paramètres
+Sinon pas de problème de publication car les variables affichées sont données en paramètres.
+Ce ne sont pas les champs de la classe.

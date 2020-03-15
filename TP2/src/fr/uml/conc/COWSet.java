@@ -2,13 +2,25 @@ package fr.uml.conc;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import javax.print.attribute.HashAttributeSet;
 import fr.uml.conc.LockFreeStringList2.Entry;
 
+/**
+ * Exercice 3 - Set 'Copy on Write'
+ * 
+ * @author melissa
+ *
+ * @param <E>
+ */
 public class COWSet<E> {
+  
+  private static int SIZE = 200_000;
+  
   private final E[][] hashArray;
 
   private static final Object[] EMPTY = new Object[0];
@@ -17,11 +29,8 @@ public class COWSet<E> {
 
   static {
     var lookup = MethodHandles.lookup();
-    try {
-      HASH_ARRAY_HANDLE = lookup.findVarHandle(COWSet.class, "hashArray", Object[][].class);
-    } catch (NoSuchFieldException | IllegalAccessException e) {
-      throw new AssertionError(e);  // pas censé être là
-    }
+    // HASH_ARRAY_HANDLE = lookup.findVarHandle(COWSet.class, "hashArray", Object[][].class);
+    HASH_ARRAY_HANDLE = MethodHandles.arrayElementVarHandle(Object[][].class);
   }
 
   @SuppressWarnings("unchecked")
@@ -35,53 +44,92 @@ public class COWSet<E> {
   public boolean add(E element) {
     Objects.requireNonNull(element);
     var index = element.hashCode() % hashArray.length;
-    // 1 lecture volatile
-    var oldArray = (E) HASH_ARRAY_HANDLE.getVolatile(hashArray[index]);
-    //oldArray = oldArray[index];
-    for (var i=0; i<((String) oldArray).length(); i++) {
-      if (element.equals(oldArray[i])) { // si l'élément est déjà présent
-        return false;
+    while (true) {
+      // 1 lecture volatile
+      var oldArray = (E[]) HASH_ARRAY_HANDLE.getVolatile(hashArray, index);
+      // les lectures suivantes de oldArray sont faites comme si oldArray était un champ volatile
+      // donc en RAM
+      // oldArray = oldArray[index];
+      for (var e : hashArray[index]) { // <-- 1 seul lect volat
+        if (element.equals(e)) {
+          return false;
+        }
       }
+
+      // agrandit de 1
+      var newArray = Arrays.copyOf(oldArray, oldArray.length + 1);
+      newArray[oldArray.length] = element;
+      // avant: hashArray[index] = newArray; // <- CAS ici
+      // insère dans hashArray[index] newArray si hashArray[index]==oldArray
+      if (HASH_ARRAY_HANDLE.compareAndSet(hashArray, index, oldArray, newArray))
+        return true;
     }
-    // agrandit de 1
-    var newArray = Arrays.copyOf(oldArray, oldArray.length + 1);
-    // CAS
-    HASH_ARRAY_HANDLE.compareAndSet(oldArray[index], newArray, newArray);
-    //newArray[oldArray.length] = element; // insère l'élément
-    hashArray[index] = newArray; // assigne le tableau
-    return true;
   }
 
   public void forEach(Consumer<? super E> consumer) {
-    // varhandle.getVolatile(hashArray, index)
     for (var index = 0; index < hashArray.length; index++) {
-      var oldArray = hashArray[index];
+      // var oldArray = hashArray[index];
+      var oldArray = (E[]) HASH_ARRAY_HANDLE.getVolatile(hashArray, index);
+      // les lectures suivantes de oldArray sont faites comme si oldArray était un champ volatile
+      // donc en RAM
       for (var element : oldArray) {
         consumer.accept(element);
       }
     }
   }
 
-  public static void main(String[] args) {
-    new Thread(() ->
-    {
-      var set = new COWSet<>(200_000);
+  public static void main(String[] args) throws InterruptedException {
+    var set = new COWSet<Integer>(SIZE/10);
 
-      for (var i = 0; i < 200_000; i++) {
+    var t1 = new Thread(() ->{
+      for (var i = 0; i < SIZE; i++) {
         set.add(i);
       }
-    }).start();
+    });
 
-    new Thread(() ->
-    {
-      var set = new COWSet<>(200_000);
+    t1.start();
 
-      for (var i = 0; i < 200_000; i++) {
+    var t2 = new Thread(() ->{
+      for (var i = 0; i < SIZE; i++) {
         set.add(i);
       }
-    }).start();
+    });
 
+    t2.start();
 
+    t1.join();
+    t2.join();
+    
+    var list = new ArrayList<>();
+    
+    // set.forEach(list::add);
+    set.forEach((elem) ->{
+      list.add(elem);
+    });
+    
+    
+    if(list.stream().count() == SIZE) {
+      System.out.println("Only distinct elements");
+    }else {
+      System.out.println("Not only distinct elements");
+    }
   }
-
 }
+
+/*
+ * Classe pas thread safe car s'il y a plusieurs threads qui lance add, la data race est le tableau.
+ * On peut lire des valeurs alors que les écritures précédentes n'ont pas encore été faites.
+ * 
+ * L'intérêt de la boucle while(true) dans la méthode add :
+ * on prend un exemple 
+ * avant: [3, 6] 
+ * 2 threads t1 et t2
+ * 
+ * t1 veut inserer [3, 6, 9] 
+ * t2 veut inserer [3, 6, 12]
+ * 
+ * t1 insère le tableau
+  t2 fait le CaS -> oldArray([3, 6]) est different de current([3, 6, 9])
+  donc t2 n'insère pas 12
+  => la boucle while(true) règle le soucis
+ */
