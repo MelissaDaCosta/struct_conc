@@ -21,8 +21,10 @@ Il existe des verrous réentrant et non réentrznt (dans la vrai vie, toujours r
 
 exemple :
 * Thread A calls function F which acquires a reentrant lock for itself before proceeding
-* Thread B calls function F which attempts to acquire a reentrant lock for itself but cannot due to one already outstanding, resulting in either a block (it waits), or a timeout if requested
-* Thread A's F calls itself recursively. It already owns the lock, so it will not block itself (no deadlock). This is the central idea of a reentrant mutex, and is what makes it different from a regular lock.
+* Thread B calls function F which attempts to acquire a reentrant lock for itself but 
+cannot due to one already outstanding, resulting in either a block (it waits), or a timeout if requested
+* Thread A's F calls itself recursively. It already owns the lock, so it will not block itself (no deadlock). 
+This is the central idea of a reentrant mutex, and is what makes it different from a regular lock.
 * Thread B's F is still waiting, or has caught the timeout and worked around it
 * Thread A's F finishes and releases its lock(s)
 * Thread B's F can now acquire a reentrant lock and proceed if it was still waiting
@@ -56,7 +58,7 @@ exemple :
     isLocked = true;
 
   }
-  Pas thread safe car on peut être interrompue entre le moment ou on test et le moment ou on prend
+  Pas thread safe car on peut être interrompue entre le moment ou on test et le moment ou on prend le lock
   => utilisé un compareAndSet pour essayer de faux à vrai
   => si plante : boucle qui attend
   
@@ -228,7 +230,7 @@ d'être initialisé. Ca marche mais après plein de NPE
 
 Si on met HOME volatile ca résout tous les problèmes !
 
-car écriture de HOME dans olatile garantie que toutes les écritures
+car écriture de HOME dans volatile garantie que toutes les écritures
 de Path sont faites avant.
 + garantie que toutes les lectures faites après sont rechargées à partir de la RAM
 

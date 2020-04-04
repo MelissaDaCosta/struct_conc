@@ -4,30 +4,47 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.nio.file.Path;
 
-public class Utils {
-  private static Path HOME;
-  private final static Object lock = new Object();
-  private static final VarHandle HANDLE;
-  static {
-    var lookup = MethodHandles.lookup();
-    try {
-      HANDLE = lookup.findVarHandle(Utils.class, "HOME", Path.class);
-    } catch (NoSuchFieldException | IllegalAccessException e) {
-      throw new AssertionError(e);
-    }
-  }
+/**
+ * Exercice 3 - Question 4 et 5
+ * 
+ * @return
+ */
 
-  public static Path getHome() {
-    var home = HANDLE.getAcquire(HOME); 
-    if (home == null) {
-      synchronized(lock) {
-        home = HANDLE.getAcquire(HOME);
-        if (home == null) {
-          return HOME = (Path) HANDLE.getAndSetRelease(Path.of(System.getenv("HOME")));
-     
+public class Utils {
+    private static Path HOME;
+    private Path HOME2;
+    private final static VarHandle HANDLE;
+    static {
+        try {
+            HANDLE = MethodHandles.lookup().findStaticVarHandle(Utils.class, "HOME", Path.class);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new AssertionError("Should not happen");
         }
-      }
     }
-    return (Path) home;
-  }
+
+    public static Path getHome() {
+        var home = (Path) HANDLE.getAcquire();
+        if (home == null) {
+            synchronized (Utils.class) {
+                home = (Path) HANDLE.getAcquire();
+                if (home == null) {
+                    HANDLE.setRelease(Path.of(System.getenv("HOME")));
+                    return (Path) HANDLE.getAcquire();
+                }
+            }
+        }
+        return home;
+    }
+
+    private static class LazyHolder {
+        static final Path HOME2 = Path.of(System.getenv("HOME"));
+    }
+
+    public static Path getHome2() {
+        return LazyHolder.HOME2;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Utils.getHome2());
+    }
 }

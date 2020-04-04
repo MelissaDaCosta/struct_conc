@@ -38,7 +38,7 @@ public class ReentrantSpinLock {
         // on sauvegarde la thread qui possède le lock dans ownerThread.
         this.ownerThread = currentThread;   // ca marche !
         // cette ecriture peut ne pas être vue par d'autre thread
-        // mais c'est pas grave car lue par le thread courant obligatoirement
+        // mais c'est pas grave car elle est lue par le thread courant obligatoirement
         return;
       }
       // sinon on regarde si la thread courante n'est pas ownerThread,
@@ -46,7 +46,7 @@ public class ReentrantSpinLock {
       if (this.ownerThread == currentThread) {
         // si oui alors on incrémente lock.
         // une seule thread peut rentrer dedans donc on peut faire ++
-        this.lock++;
+        this.lock++;    // écriture volatile : toutes les autres écritures ont été faites en RAM avant
         return;
       }
       // et il faut une boucle pour retenter le CAS après avoir appelé onSpinWait()
@@ -65,13 +65,13 @@ public class ReentrantSpinLock {
     // ici on est le owner thread, pas d'autre thread qui peuvent passer
     var lockVolatile = this.lock; // lecture volatile
     // pour éviter de faire plein de traffic en lecture et écriture volatil qui coutent chere
-    // on stock dans un variable intermédiare pour éviter ca
+    // on stock dans un variable intermédiaire pour éviter ca
     // si lock == 1
     if (lockVolatile == 1) {
       // on remet ownerThread à null
       this.ownerThread = null; // rend le lock
       // ecriture volatile: donc pas besoin de ownerthread volatile
-      // car garantie que les écritures d'avant vont être fait en RAM avant
+      // car garantie que les écritures d'avant ont été faites en RAM avant
       this.lock = 0;
       return;
     }
