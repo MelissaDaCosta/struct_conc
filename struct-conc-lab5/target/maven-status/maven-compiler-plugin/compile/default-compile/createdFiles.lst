@@ -1,10 +1,12 @@
+fr/umlv/structconc/generated/VectorizedBenchMark_sum_reduce_lane_jmhTest.class
 META-INF/CompilerHints
-fr/umlv/structconc/generated/VectorizedBenchMark_jmhType.class
-fr/umlv/structconc/generated/VectorizedBenchMark_jmhType_B3.class
-fr/umlv/structconc/generated/VectorizedBenchMark_sum_loop_jmhTest.class
 fr/umlv/structconc/generated/VectorizedBenchMark_jmhType_B2.class
 fr/umlv/structconc/VectorizedBenchMark.class
 META-INF/BenchmarkList
 module-info.class
 fr/umlv/structconc/Vectorized.class
 fr/umlv/structconc/generated/VectorizedBenchMark_jmhType_B1.class
+fr/umlv/structconc/generated/VectorizedBenchMark_jmhType.class
+fr/umlv/structconc/generated/VectorizedBenchMark_jmhType_B3.class
+fr/umlv/structconc/generated/VectorizedBenchMark_sum_loop_jmhTest.class
+fr/umlv/structconc/generated/VectorizedBenchMark_sum_lane_wise_jmhTest.class

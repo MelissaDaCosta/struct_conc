@@ -25,4 +25,14 @@ public class VectorizedBenchMark {
   public int sum_loop() {
     return Vectorized.sumLoop(array);
   }
+  
+  @Benchmark
+  public int sum_reduce_lane() {
+    return Vectorized.sumReduceLane(array);
+  }
+  
+  @Benchmark
+  public int sum_lane_wise() {
+    return Vectorized.sumLanewise(array);
+  }
 }
