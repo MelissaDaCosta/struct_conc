@@ -64,7 +64,9 @@ public class Vectorized {
       IntVector vector2 = IntVector.fromArray(SPECIES, array, i);
       // add les 2 vecteurs
       // opération add en lanewsise
-      resultVector = resultVector.add(vector2);
+      // resultVector = resultVector.add(vector2);
+      // ==
+      resultVector = resultVector.lanewise(VectorOperators.ADD, vector2);
     }
     // fait la somme des valeurs du vecteur
     var sum = resultVector.reduceLanes(VectorOperators.ADD);
@@ -80,28 +82,68 @@ public class Vectorized {
    */
 
   public static int differenceLanewise(int array[]) {
-    
-    if(array.length == 0)
+
+    // renvoie 0 si tableau vide
+    if (array.length == 0)
       return 0;
-    
+
     var i = 0;
     var limit = array.length - (array.length % SPECIES.length());
     // main loop
-    var resultVector = IntVector.zero(SPECIES); // faire les additions dans ce vecteur là
+    var resultVector = IntVector.zero(SPECIES);
     for (; i < limit; i += SPECIES.length()) {
       IntVector vector2 = IntVector.fromArray(SPECIES, array, i);
-      // add les 2 vecteurs
-      // opération add en lanewsise
-      //vec = vec.lanewise(ADD, tmp);
-      resultVector = resultVector.add(vector2);
+      resultVector = resultVector.sub(vector2);
     }
-    // fait la somme des valeurs du vecteur
-    var sum = resultVector.reduceLanes(VectorOperators.ADD);
+
+    var sub = 0;
     // post loop
     for (; i < array.length; i++) {
-      sum += array[i];
+      sub += array[i];
     }
-    return sum;
+    // fait le sub à la main car sub pas associatif comme ADD
+    sub -= resultVector.reduceLanes(VectorOperators.ADD);
+    return -sub;
+  }
+
+  /**
+   * Exercice 4 - MinMax
+   */
+
+  public static int[] minmax(int[] array) {
+    // vector avec que des max
+    var minVector = IntVector.broadcast(SPECIES, Integer.MAX_VALUE);
+    // vector avec que des min
+    var maxVector = IntVector.broadcast(SPECIES, Integer.MIN_VALUE);
+
+    var i = 0;
+    var limit = array.length - (array.length % SPECIES.length()); // main loop
+
+    for (; i < limit; i += SPECIES.length()) {
+      var vector = IntVector.fromArray(SPECIES, array, i);
+      // trouve le min entre tous les int de la lane
+      minVector = minVector.min(vector);
+      // trouve le max entre tous les int de la lane
+      maxVector = maxVector.max(vector);
+    }
+
+    // trouve le min entre tous les int du vector (qui contient les min de chaque lane)
+    int min = minVector.reduceLanes(VectorOperators.MIN);
+    // trouve le max entre tous les int du vector (qui contient les max de chaque lane)
+    int max = maxVector.reduceLanes(VectorOperators.MAX);
+
+    // post loop s'il y a des éléments pas parcouru du tableau
+    for (; i < array.length; i++) { 
+      if (array[i] < min) {
+        min = array[i];
+      }
+
+      if (array[i] > max) {
+        max = array[i];
+      }
+    }
+
+    return new int[] {min, max};
   }
 }
 

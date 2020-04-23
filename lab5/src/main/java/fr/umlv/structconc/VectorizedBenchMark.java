@@ -35,4 +35,13 @@ public class VectorizedBenchMark {
   public int sum_lane_wise() {
     return Vectorized.sumLanewise(array);
   }
+  
+  public int difference_lanewise() {
+    return Vectorized.differenceLanewise(array);
+  }
+  
+  @Benchmark
+  public int[] minmax() {
+      return Vectorized.minmax(array);
+  }
 }
