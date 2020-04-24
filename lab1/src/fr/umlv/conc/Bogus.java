@@ -4,7 +4,7 @@ package fr.umlv.conc;
  * Exercice 1 - A vos chronometres
  * 1
  * @author melissa
- *
+ * Code à la base sans les synchronized
  */
 public class Bogus {
   private boolean stop;
@@ -47,6 +47,8 @@ public class Bogus {
 
 
 /**
+SANS LA CORRECTION AVEC LES SYNCHRONIZED :
+ 
 La data race entre les threads est stop
 Le programme lance un thread qui augmente un compteur et ensuite 
 demande au thread de se mettre en pause (Thread.sleep) 

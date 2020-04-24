@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /* Exercice 3 - Liste chaînée lock-free */
 
-public class Linked2<E> {
+public class LinkedVarHandle<E> {
   private static class Entry<E> {
     private final E element; // nom mutable pas de soucis thread safe
     private final Entry<E> next;
@@ -26,7 +26,7 @@ public class Linked2<E> {
   static {
     var lookup = MethodHandles.lookup();
     try {
-      VARHANDLE = lookup.findVarHandle(Linked2.class, "head", Entry.class);
+      VARHANDLE = lookup.findVarHandle(LinkedVarHandle.class, "head", Entry.class);
     } catch (NoSuchFieldException | IllegalAccessException e) {
       throw new AssertionError(e);
     }
@@ -54,7 +54,7 @@ public class Linked2<E> {
   }
 
   public static void main(String[] args) throws InterruptedException {
-    var linked = new Linked2<String>();
+    var linked = new LinkedVarHandle<String>();
     var threads = new ArrayList<Thread>();
 
     for (var i = 0; i < 4; i++) {

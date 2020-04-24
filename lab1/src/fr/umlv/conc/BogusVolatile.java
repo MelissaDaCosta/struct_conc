@@ -1,6 +1,6 @@
 package fr.umlv.conc;
 
-// 243 763 612
+// 243 763 612, en faite ca dépend du coup, il s'arrête quand le sleep est fini
 
 /**
  * Exercice 1 - A vos chronometres
@@ -48,34 +48,13 @@ public class BogusVolatile {
   }
 }
 
-
-/**
-La data race entre les threads est stop
-Le programme lance un thread qui augmente un compteur et ensuite 
-demande au thread de se mettre en pause (Thread.sleep) 
-Puis, il modifie la variable stop
-Puis, le programme attend que le thread meurt avec la méthode join.
-La méthode static stop s'excute sur le thread courant.
-
-
-Il ya 2 thread : le principale et le new Thread
-
-Le programme est infinie car il crée une var locale stop et donc la modification
-dans la méthode stop ne se fait pas
-L'opti met la var stop dans un registre car + rapide
-et la méthode stop fait la modif dans la ram
-*/
-
-
-
-
 /**
 Les instructions assembleur sont atomiques
-IL est possible d'accéder à ces opérations etomic grâce qu package atomic
+IL est possible d'accéder à ces opérations atomic grâce au package atomic
 
  Mot clé volatile = non pas dans un registre
- mais dans RAM (champs vplus lent)
- - puissant que synchronized
+ mais dans RAM (champs plus lent)
+ moins puissant que synchronized
  
  AtomicInteger = nouvel object = pb de perf
  
@@ -83,12 +62,10 @@ IL est possible d'accéder à ces opérations etomic grâce qu package atomic
  Avec compareAndSet on peut simuler l'opération
  CAS(&field, expectedValue, newValue)->boolean 
  
- On apelle     es implantations qui n'ont ni blocs synchronized, ni lock : 
+ On apelle les implantations qui n'ont ni blocs synchronized, ni lock : 
  lock-free
  
  On a la garantit avec volatile qu'on peut lire et écrire des 64 bits de facon atomique 
  (pas 32bit puis 32bits) 
-
-
  
  */

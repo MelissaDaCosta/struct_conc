@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  */
 
-public class Counter2 {
+public class CounterGetAndIncrement {
 	// private int counter;
 	// private volatile int counter;
 	// cela ne change rien, forcer les aller-retour en RAM ne change rien
@@ -22,7 +22,7 @@ public class Counter2 {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		var counter = new Counter2();
+		var counter = new CounterGetAndIncrement();
 		var threads = new ArrayList<Thread>();
 
 		for (var i = 0; i < 4; i++) {
@@ -39,7 +39,7 @@ public class Counter2 {
 			thread.join();
 		}
 
-		System.out.println(counter.counter);
+		System.out.println(counter.counter);  // affiche bien 400 000
 	}
 }
 

@@ -24,6 +24,7 @@ public class LinkedAtomicReference<E> {
 
 	public void addFirst(E element) {
 		Objects.requireNonNull(element);
+		// tant qu'on a pas ajouté le nouveau maillon
 		while (true) {
 			var currentHead = head.get();
 			// pas le choix de faire de l'allocation

@@ -17,8 +17,11 @@ public class CounterAtomicInteger {
 	private final AtomicInteger counter = new AtomicInteger();
 
 	public int nextInt() {
+	  // tourne jusqu'à ce qu'on incrémente la valeur de 1
 		while (true) {
 			var currentValue = counter.get();
+			// si la valeur a été incrémenté de 1
+			// compareAndSet​(int expectedValue, int newValue)
 			if (counter.compareAndSet(currentValue, currentValue + 1)) {
 				return currentValue;
 			}
@@ -60,5 +63,5 @@ public class CounterAtomicInteger {
  * 3. CAS(&field, expectedValue, newValue)->boolean Le boolean de retour de la
  * méthode CompareAndSet retourne true si le contenue de field === expectedValue
  * 
- * 
+ * compareAndSet​(int expectedValue, int newValue)
  */
