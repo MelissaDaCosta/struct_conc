@@ -56,7 +56,6 @@ public class ReentrantSpinLock {
 
 
   public void unlock() {
-    // idée de l'algo
     // si la thread courante est != ownerThread
     if (this.ownerThread != Thread.currentThread()) {
       // on pète une exception
@@ -64,8 +63,8 @@ public class ReentrantSpinLock {
     }
     // ici on est le owner thread, pas d'autre thread qui peuvent passer
     var lockVolatile = this.lock; // lecture volatile
-    // pour éviter de faire plein de traffic en lecture et écriture volatil qui coutent chere
-    // on stock dans un variable intermédiaire pour éviter ca
+    // pour éviter de faire plein de traffic en lecture et écriture volatile qui coutent chere
+    // on stock dans une variable intermédiaire le lock
     // si lock == 1
     if (lockVolatile == 1) {
       // on remet ownerThread à null
@@ -107,6 +106,6 @@ public class ReentrantSpinLock {
     t2.start();
     t1.join();
     t2.join();
-    System.out.println("counter " + runnable.counter); // ON a bien 2M
+    System.out.println("counter : " + runnable.counter); // On a bien 2M
   }
 }

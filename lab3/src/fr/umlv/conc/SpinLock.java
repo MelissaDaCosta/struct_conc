@@ -10,6 +10,8 @@ import java.lang.invoke.VarHandle;
  */
 
 public class SpinLock {
+  private volatile boolean isLocked;
+  
   private static final VarHandle HANDLE;
   static {
     var lookup = MethodHandles.lookup();
@@ -20,7 +22,6 @@ public class SpinLock {
     }
   }
 
-  private volatile boolean isLocked;
 
   /**
    * onSpinWait​() Indicates that the caller is momentarily unable to progress, until the occurrence
@@ -72,6 +73,6 @@ public class SpinLock {
     t2.start();
     t1.join();
     t2.join();
-    System.out.println("counter " + runnable.counter); // On a bien 2M
+    System.out.println("counter : " + runnable.counter); // On a bien 2M
   }
 }
