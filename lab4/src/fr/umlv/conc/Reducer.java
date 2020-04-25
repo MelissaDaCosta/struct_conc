@@ -14,7 +14,7 @@ public class Reducer {
   // Exercice 2 - 3.3
   // classe paramétrée par le type de valeur de retour : Integer
   public static class ReduceTask extends RecursiveTask<Integer> {
-    // subdiviser le tableau jusqu'à ce qu'on ai des problèmes plus simple.
+    // subdiviser le tableau jusqu'à ce qu'on ait des problèmes plus simple.
     private final static int SIZE_LIMIT = 1024;
     private int start; // début du tableau
     private int end; // fin du tableau
@@ -112,6 +112,8 @@ public class Reducer {
     // garantie qu'on ne trouve pas un cycle dans les valeurs
     // nbArg, min (compris, max(non compris)
     var array = random.ints(1_000_000, 0, 1_000).toArray();
+    System.out.println(reduce(array, 0, Integer::sum));
+    System.out.println(reduce(array, 0, Math::max));
     System.out.println(sum(array));
     System.out.println(max(array));
     System.out.println(parallelReduceWithForkJoin(array, 0, Integer::sum));

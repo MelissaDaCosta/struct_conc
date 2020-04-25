@@ -49,9 +49,10 @@ public class ForkJoinCollections {
         ReduceTask r1 = new ReduceTask(spliterator, threshold, initialValue, acc, combiner);
         ReduceTask r2 = new ReduceTask(spliterator2, threshold, initialValue, acc, combiner);
         r1.fork(); // déléguer cette partie a une autre thread
-        var res2 = sequentialReduce(spliterator2, initialValue, acc); // continue de faire le calcul dans cette thread
+        //var res2 = sequentialReduce(spliterator2, initialValue, acc); // continue de faire le calcul dans cette thread
+        var res2 = r2.compute();
         var res1 = r1.join(); // attend tant que r1 n'a pas fini son calcul
-        return combiner.apply((V) res1, res2);
+        return combiner.apply((V) res1, (V) res2);
       }
     }
   }
@@ -107,5 +108,4 @@ public class ForkJoinCollections {
         forkJoinReduce(list, 1_000, 0, (acc, value) -> acc + value, (acc1, acc2) -> acc1 + acc2);
     System.out.println(result);
   }
-
 }
