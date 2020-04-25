@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="fr.umlv.structconc.VectorizedTest" time="0.347" tests="21" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="fr.umlv.structconc.VectorizedTest" time="0.426" tests="35" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="15"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/struct-conc-lab5/target/test-classes:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.2/junit-jupiter-api-5.6.2.jar:/home/melissa/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/melissa/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-commons/1.6.2/junit-platform-commons-1.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.6.2/junit-jupiter-params-5.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.2/junit-jupiter-engine-5.6.2.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-engine/1.6.2/junit-platform-engine-1.6.2.jar:/home/melissa/.m2/repository/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar:/home/melissa/.m2/repository/org/apache/commons/commons-math3/3.2/commons-math3-3.2.jar:"/>
+    <property name="java.class.path" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/lab5/target/test-classes:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.2/junit-jupiter-api-5.6.2.jar:/home/melissa/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/melissa/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-commons/1.6.2/junit-platform-commons-1.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.6.2/junit-jupiter-params-5.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.2/junit-jupiter-engine-5.6.2.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-engine/1.6.2/junit-platform-engine-1.6.2.jar:/home/melissa/.m2/repository/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar:/home/melissa/.m2/repository/org/apache/commons/commons-math3/3.2/commons-math3-3.2.jar:"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://openjdk.java.net/"/>
@@ -12,23 +12,23 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/jdk-15-vector/lib"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/struct-conc-lab5/target/surefire 2020-04-21T11-59-05_811-jvmRun1 surefire3639266895078168402tmp surefire_02076365174120085081tmp"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/lab5/target/surefire 2020-04-23T16-58-30_057-jvmRun1 surefire5792101931383622292tmp surefire_07153569765067014213tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/struct-conc-lab5/target/test-classes:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.2/junit-jupiter-api-5.6.2.jar:/home/melissa/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/melissa/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-commons/1.6.2/junit-platform-commons-1.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.6.2/junit-jupiter-params-5.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.2/junit-jupiter-engine-5.6.2.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-engine/1.6.2/junit-platform-engine-1.6.2.jar:/home/melissa/.m2/repository/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar:/home/melissa/.m2/repository/org/apache/commons/commons-math3/3.2/commons-math3-3.2.jar:"/>
+    <property name="surefire.test.class.path" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/lab5/target/test-classes:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.2/junit-jupiter-api-5.6.2.jar:/home/melissa/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/melissa/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-commons/1.6.2/junit-platform-commons-1.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.6.2/junit-jupiter-params-5.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.2/junit-jupiter-engine-5.6.2.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-engine/1.6.2/junit-platform-engine-1.6.2.jar:/home/melissa/.m2/repository/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar:/home/melissa/.m2/repository/org/apache/commons/commons-math3/3.2/commons-math3-3.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/home/melissa"/>
     <property name="user.language" value="fr"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="jdk.module.path" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/struct-conc-lab5/target/classes:/home/melissa/.m2/repository/org/openjdk/jmh/jmh-core/1.23/jmh-core-1.23.jar:/home/melissa/.m2/repository/org/openjdk/jmh/jmh-generator-annprocess/1.23/jmh-generator-annprocess-1.23.jar"/>
+    <property name="jdk.module.path" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/lab5/target/classes:/home/melissa/.m2/repository/org/openjdk/jmh/jmh-core/1.23/jmh-core-1.23.jar:/home/melissa/.m2/repository/org/openjdk/jmh/jmh-generator-annprocess/1.23/jmh-generator-annprocess-1.23.jar"/>
     <property name="java.version.date" value="2020-09-15"/>
     <property name="java.home" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/jdk-15-vector"/>
     <property name="file.separator" value="/"/>
-    <property name="basedir" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/struct-conc-lab5"/>
+    <property name="basedir" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/lab5"/>
     <property name="java.vm.compressedOopsMode" value="32-bit"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/melissa/.m2/repository/org/apache/maven/surefire/surefire-booter/3.0.0-M4/surefire-booter-3.0.0-M4.jar:/home/melissa/.m2/repository/org/apache/maven/surefire/surefire-api/3.0.0-M4/surefire-api-3.0.0-M4.jar:/home/melissa/.m2/repository/org/apache/maven/surefire/surefire-logger-api/3.0.0-M4/surefire-logger-api-3.0.0-M4.jar:/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/struct-conc-lab5/target/test-classes:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.2/junit-jupiter-api-5.6.2.jar:/home/melissa/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/melissa/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-commons/1.6.2/junit-platform-commons-1.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.6.2/junit-jupiter-params-5.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.2/junit-jupiter-engine-5.6.2.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-engine/1.6.2/junit-platform-engine-1.6.2.jar:/home/melissa/.m2/repository/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar:/home/melissa/.m2/repository/org/apache/commons/commons-math3/3.2/commons-math3-3.2.jar:/home/melissa/.m2/repository/org/apache/maven/surefire/surefire-junit-platform/3.0.0-M4/surefire-junit-platform-3.0.0-M4.jar:/home/melissa/.m2/repository/org/apache/maven/surefire/common-java5/3.0.0-M4/common-java5-3.0.0-M4.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-launcher/1.6.2/junit-platform-launcher-1.6.2.jar"/>
+    <property name="surefire.real.class.path" value="/home/melissa/.m2/repository/org/apache/maven/surefire/surefire-booter/3.0.0-M4/surefire-booter-3.0.0-M4.jar:/home/melissa/.m2/repository/org/apache/maven/surefire/surefire-api/3.0.0-M4/surefire-api-3.0.0-M4.jar:/home/melissa/.m2/repository/org/apache/maven/surefire/surefire-logger-api/3.0.0-M4/surefire-logger-api-3.0.0-M4.jar:/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/lab5/target/test-classes:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.2/junit-jupiter-api-5.6.2.jar:/home/melissa/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/melissa/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-commons/1.6.2/junit-platform-commons-1.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.6.2/junit-jupiter-params-5.6.2.jar:/home/melissa/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.2/junit-jupiter-engine-5.6.2.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-engine/1.6.2/junit-platform-engine-1.6.2.jar:/home/melissa/.m2/repository/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar:/home/melissa/.m2/repository/org/apache/commons/commons-math3/3.2/commons-math3-3.2.jar:/home/melissa/.m2/repository/org/apache/maven/surefire/surefire-junit-platform/3.0.0-M4/surefire-junit-platform-3.0.0-M4.jar:/home/melissa/.m2/repository/org/apache/maven/surefire/common-java5/3.0.0-M4/common-java5-3.0.0-M4.jar:/home/melissa/.m2/repository/org/junit/platform/junit-platform-launcher/1.6.2/junit-platform-launcher-1.6.2.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="15-dev+0-1ecbddb2f312"/>
     <property name="user.name" value="melissa"/>
@@ -41,7 +41,7 @@
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="java.version" value="15-dev"/>
-    <property name="user.dir" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/struct-conc-lab5"/>
+    <property name="user.dir" value="/media/melissa/Données/ESIPE/INFO 2/collections_concurrentes/structures_concurrentes/lab5"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
@@ -51,25 +51,39 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="59.0"/>
   </properties>
-  <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.044"/>
+  <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.043"/>
   <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
   <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.019"/>
+  <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
   <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.002"/>
-  <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.004"/>
   <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.018"/>
-  <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.018"/>
+  <testcase name="sumReduceLaneTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.015"/>
+  <testcase name="minmax([I, [I)" classname="fr.umlv.structconc.VectorizedTest" time="0.003"/>
+  <testcase name="minmax([I, [I)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
+  <testcase name="minmax([I, [I)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
+  <testcase name="minmax([I, [I)" classname="fr.umlv.structconc.VectorizedTest" time="0"/>
+  <testcase name="minmax([I, [I)" classname="fr.umlv.structconc.VectorizedTest" time="0.002"/>
+  <testcase name="minmax([I, [I)" classname="fr.umlv.structconc.VectorizedTest" time="0.006"/>
+  <testcase name="minmax([I, [I)" classname="fr.umlv.structconc.VectorizedTest" time="0.019"/>
+  <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0"/>
+  <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
   <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0"/>
   <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
   <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
-  <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
-  <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0"/>
-  <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.01"/>
-  <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.011"/>
+  <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.002"/>
+  <testcase name="sum([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.024"/>
+  <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
+  <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
+  <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
   <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
   <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0"/>
   <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
-  <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
-  <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
-  <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.004"/>
-  <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.02"/>
+  <testcase name="sumLanewiseTest([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.018"/>
+  <testcase name="differenceLanewise([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0"/>
+  <testcase name="differenceLanewise([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
+  <testcase name="differenceLanewise([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
+  <testcase name="differenceLanewise([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
+  <testcase name="differenceLanewise([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.001"/>
+  <testcase name="differenceLanewise([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.002"/>
+  <testcase name="differenceLanewise([I, int)" classname="fr.umlv.structconc.VectorizedTest" time="0.012"/>
 </testsuite>

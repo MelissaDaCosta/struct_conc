@@ -1,0 +1,14 @@
+language: java
+jdk: openjdk13
+
+os:
+  - linux
+  - osx
+
+env:
+  matrix:
+    - FOLDER="lab5"
+
+script: 
+  - chmod u+x script.sh 
+  - ./script.sh

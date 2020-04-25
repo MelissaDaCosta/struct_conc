@@ -142,7 +142,6 @@ public class Vectorized {
         max = array[i];
       }
     }
-
     return new int[] {min, max};
   }
 }
