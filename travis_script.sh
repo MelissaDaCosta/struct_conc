@@ -16,7 +16,7 @@ fi
 
 cd $FOLDER
 echo $JAVA_HOME
-mvn package
+mvn clean package
 
 # lauchn benchmark :
 $JAVA_HOME/bin/java --add-modules jdk.incubator.vector -jar target/benchmarks.jar 
