@@ -7,8 +7,8 @@ os:
 
 env:
   matrix:
-    - FOLDER="lab5"
+    - FOLDER=lab5
 
 script: 
-  - chmod u+x script.sh 
-  - ./script.sh
+  - chmod u+x travis_script.sh 
+  - ./travis_script.sh
