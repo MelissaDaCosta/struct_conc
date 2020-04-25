@@ -29,7 +29,8 @@ public class COWSet<E> {
 
   static {
     var lookup = MethodHandles.lookup();
-    // HASH_ARRAY_HANDLE = lookup.findVarHandle(COWSet.class, "hashArray", Object[][].class);
+    //HASH_ARRAY_HANDLE = lookup.findVarHandle(COWSet.class, "hashArray", Object[][].class);
+    // récupère le hashArray
     HASH_ARRAY_HANDLE = MethodHandles.arrayElementVarHandle(Object[][].class);
   }
 
@@ -131,5 +132,7 @@ public class COWSet<E> {
  * t1 insère le tableau
   t2 fait le CaS -> oldArray([3, 6]) est different de current([3, 6, 9])
   donc t2 n'insère pas 12
-  => la boucle while(true) règle le soucis
+  on refait un tour de boucle while(true)
+  puis oldArray([3, 6, 9]) est == à current([3, 6, 9]) donc t2 fait le cAs et insère 12
+  => la boucle while(true) règle le soucis sinon pas de nouvelle insertion concurrente
  */

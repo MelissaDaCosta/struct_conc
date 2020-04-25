@@ -55,17 +55,16 @@ public class LockFreeStringList {
     var currentLast = head;
     while (true) {
       var next = currentLast.next; // volatile read
-      if (next == null) { // dernier maillon
-        // change le champ next de l'objet last
+      if (next == null) { // on est arrivé au dernier maillon
         // change le champ next de l'objet last
         // insertion du maillon newLast
         // si currentLast == null
-        if (NEXT_HANDLE.compareAndSet(currentLast, null, newLast)) { 
+        // alors next = newLast
+        if (NEXT_HANDLE.compareAndSet(currentLast, null, newLast)) {
           return;
         }
-
-        next = currentLast.next; // si ca ne fonctionne pas, last.next n'est plus null : on passe au
-                                 // suivant
+        // si le CAS n'est pas passé, last.next n'est plus null : on passe au suivant
+        next = currentLast.next;
       }
       currentLast = next; // déplace le dernier maillon
     }

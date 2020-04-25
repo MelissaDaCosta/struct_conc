@@ -63,12 +63,13 @@ public class LockFreeStringList2 {
         // si currentLast == null
         if (NEXT_HANDLE.compareAndSet(currentLast, null, newLast)) {
           // tail = newLast;
-          // si on entoure d'un if pas besoin de cast
+          // si on entoure d'un if la ligne suivante : pas besoin de cast (boolean)
           var b = (boolean) TAIL_HANDLE.compareAndSet(this, oldTail, newLast);
-          // si ca rate un autre thread a été mis à jour donc on ne doit rien faire
+          // si ca rate (this!= oldTail) ca veux dire que this à déjà été m-à-j
+          // avec la nouvelle valeur de tail : un autre thread a màj donc on ne doit rien faire
           return;
         }
-        // si ca ne fonctionne pas, plein de maillons on été insérés entreF
+        // si ca ne fonctionne pas, plein de maillons on été insérés entre
         next = tail; // on recharge tail
       }
       currentLast = next; // déplace le dernier maillon

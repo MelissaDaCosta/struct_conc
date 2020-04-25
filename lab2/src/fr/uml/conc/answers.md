@@ -1,8 +1,9 @@
- 
+ Lab2
+ =====================================================================
  1. 
  Le problème de publication c'est quand une thread peut voir un objet
  avec des champs non initialisé
- car la premier thred a été deschedulé avant
+ car la premier thread a été deschedulé avant
   
 2.
 IL peut y avoir une thread qui crée objet Foo
